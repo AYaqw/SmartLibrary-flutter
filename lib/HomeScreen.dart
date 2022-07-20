@@ -17,9 +17,8 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       home:Scaffold(
         appBar: AppBar(title: const Text("Smart library"),centerTitle: true,),
-        body: Center(
-        child:Container(
-          decoration: const BoxDecoration(
+        body:const Center(
+          /*child:Container(*decoration: const BoxDecoration(
               gradient: LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
@@ -34,12 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Color(0xFF4563DB),
                     Color(0xFF5036d5),
                     Color(0xFF5B16D0),
-                  ])),
-          child:const Padding(
-            padding:  EdgeInsets.all(30.0),
-            child: Center(child: Text("Home page",style: TextStyle(color: Colors.white,fontSize: 30),),),
-          ),
-        ),
+                  ])),),*/
+          child: Center(child: Text("Home page",style: TextStyle(color: Colors.white,fontSize: 30),),),
+
       ),
       ),
     );

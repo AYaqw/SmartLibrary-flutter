@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smart_library/log_screen.dart';
 import 'page.dart';
+import 'signScreen.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
-  int _numPage = 4; //TODO:: 4
+  final int _numPage = 4; //TODO:: 4
   final PageController pageController = PageController(initialPage: 0);
   int _currentPage = 0;
 
@@ -25,12 +26,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   Widget _indictor(bool isActive) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 150),
-      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      duration:const Duration(milliseconds: 150),
+      margin: const EdgeInsets.symmetric(horizontal: 8.0),
       height: 8.0,
       width: isActive ? 24.0 : 16.0,
       decoration: BoxDecoration(
-          color: isActive ? Colors.white : Color(0xFF7B51D3),
+          color: isActive ? Colors.white : const Color(0xFF7B51D3),
           borderRadius: BorderRadius.circular(16.0)),
     );
   }
@@ -58,14 +59,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Color(0xFF5B16D0),
               ])),
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 40),
+            padding: const EdgeInsets.symmetric(vertical: 40),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
                   alignment: Alignment.centerRight,
                   child: FlatButton(
-                    onPressed: () {print("skip");/*_numPage=4;*/},
+                    onPressed: () {
+                      print("skip");
+                      Navigator.push(context,MaterialPageRoute(builder: (context)=> SignScreen()));
+                      /*_numPage=4;*/},
                     child: const Text(
                       'Skip',
                       style: TextStyle(color: Colors.white, fontSize: 20),
@@ -75,7 +79,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 Container(
                   height: 600,
                   child: PageView(
-                    physics: ClampingScrollPhysics(),
+                    physics: const ClampingScrollPhysics(),
                     controller: pageController,
                     onPageChanged: (int page) {
                       setState(() {
@@ -83,7 +87,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       });
                     },
                     children: [
-
+                      // const SignScreen(),
                       //page-1
                       Page_screen("../assets/img1.png",
                           "There is no friend as loyal as a book."),
@@ -94,7 +98,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       Page_screen("../assets/img3.png",
                           "It is better to Know one book intimately than a hundred suuperficially."),
                       //page-4
-                      log_screen(),
+                      const log_screen(),
                     ],
                   ),
                 ),
@@ -110,23 +114,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                             onPressed: () {
                               print("Next");
                               pageController.nextPage(
-                                duration: Duration(milliseconds: 500),
+                                duration: const Duration(milliseconds: 500),
                                 curve: Curves.ease,
                               );
                             },
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               mainAxisSize: MainAxisSize.min,
-                              children: [
+                              children:const [
                                 Text(
                                   'Next',
                                   style: TextStyle(
                                       color: Colors.white, fontSize: 22.0),
                                 ),
-                                const SizedBox(
+                                 SizedBox(
                                   height: 10,
                                 ),
-                                Icon(
+                                 Icon(
                                   Icons.arrow_forward,
                                   color: Colors.white,
                                   size: 30.0,
@@ -136,34 +140,13 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           ),
                         ),
                       )
-                    : Text(''),
+                    : const Text(''),
               ],
             ),
           ),
         ),
       ),
-      bottomSheet: _currentPage == _numPage - 1
-          ? Container(
-              height: 80,
-              width: double.infinity,
-              color: Colors.white,
-              child: GestureDetector(
-                onTap: () {
-                  print("Get started");
-                },
-                child: Center(
-                  // padding: EdgeInsets.only(bottom: 30.0),
-                  child: Text(
-                    'Get started',
-                    style: TextStyle(
-                        color: Color(0xFF5B16D0),
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ),
-            )
-          : Text(''),
+
     );
   }
 }
